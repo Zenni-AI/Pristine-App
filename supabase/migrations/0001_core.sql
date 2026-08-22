@@ -98,13 +98,9 @@ create table babysitter_sessions (
   hourly_rate_cents integer,
   flat_session_rate_cents integer,              -- for $2.99/session pricing model
   status text not null default 'scheduled' check (status in ('scheduled','active','completed','canceled')),
-  care_kids member_ids := null,                 -- placeholder, replaced below
+  care_kids uuid[] not null default '{}',       -- household_members.id[] of kids being watched
   created_at timestamptz not null default now()
 );
-
--- (member_ids isn't a real type — fix the babysitter_sessions table properly)
-alter table babysitter_sessions drop column care_kids;
-alter table babysitter_sessions add column care_kids uuid[] not null default '{}'; -- household_members.id[] of kids being watched
 
 -- What a babysitter is allowed to see for this session — nothing by default,
 -- each item must be explicitly unlocked by an admin.
