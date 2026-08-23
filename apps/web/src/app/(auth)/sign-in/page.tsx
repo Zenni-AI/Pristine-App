@@ -15,14 +15,23 @@ export default function SignInPage() {
   const handlePasswordAuth = async (kind: 'sign_in' | 'sign_up') => {
     setError(null);
     setBusy(true);
-    const { error: authError } =
-      kind === 'sign_in'
-        ? await supabase.auth.signInWithPassword({ email: email.trim(), password })
-        : await supabase.auth.signUp({ email: email.trim(), password });
-    setBusy(false);
-    if (authError) return setError(authError.message);
-    await refresh();
-    router.push('/dashboard');
+    try {
+      const { error: authError } =
+        kind === 'sign_in'
+          ? await supabase.auth.signInWithPassword({ email: email.trim(), password })
+          : await supabase.auth.signUp({ email: email.trim(), password });
+      if (authError) {
+        setError(authError.message || 'Something went wrong. Please try again.');
+        return;
+      }
+      await refresh();
+      router.push('/dashboard');
+    } catch (err) {
+      console.error('Sign-in/sign-up failed:', err);
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please check your connection and try again.');
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (

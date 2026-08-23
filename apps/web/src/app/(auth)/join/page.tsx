@@ -25,14 +25,28 @@ export default function JoinPage() {
   const submit = async () => {
     setError(null);
     setSubmitting(true);
-    const { error: rpcError } =
-      mode === 'create'
-        ? await supabase.rpc('fn_create_household', { p_name: householdName.trim() || 'My Household', p_display_name: displayName.trim() || 'Admin' })
-        : await supabase.rpc('fn_join_household', { p_invite_code: inviteCode.trim().toUpperCase(), p_role: role, p_display_name: displayName.trim() || 'Member' });
-    setSubmitting(false);
-    if (rpcError) return setError(rpcError.message);
-    await refresh();
-    router.push('/dashboard');
+    // Everything below is wrapped in try/catch/finally — without it, a thrown
+    // exception (network hiccup, timeout, anything that rejects the promise
+    // instead of resolving to { data, error }) would skip setSubmitting(false)
+    // entirely, leaving the button stuck on "Please wait…" forever with no
+    // visible error and no navigation.
+    try {
+      const { error: rpcError } =
+        mode === 'create'
+          ? await supabase.rpc('fn_create_household', { p_name: householdName.trim() || 'My Household', p_display_name: displayName.trim() || 'Admin' })
+          : await supabase.rpc('fn_join_household', { p_invite_code: inviteCode.trim().toUpperCase(), p_role: role, p_display_name: displayName.trim() || 'Member' });
+      if (rpcError) {
+        setError(rpcError.message || 'Something went wrong creating your household. Please try again.');
+        return;
+      }
+      await refresh();
+      router.push('/dashboard');
+    } catch (err) {
+      console.error('Household create/join failed:', err);
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
