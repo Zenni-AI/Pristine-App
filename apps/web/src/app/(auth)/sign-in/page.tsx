@@ -22,7 +22,7 @@ export default function SignInPage() {
     setBusy(false);
     if (authError) return setError(authError.message);
     await refresh();
-    router.push('/');
+    router.push('/dashboard');
   };
 
   return (
