@@ -16,7 +16,7 @@ export default function SignInPage() {
     setError(null);
     setBusy(true);
     try {
-      const { error: authError } =
+      const { data: authData, error: authError } =
         kind === 'sign_in'
           ? await supabase.auth.signInWithPassword({ email: email.trim(), password })
           : await supabase.auth.signUp({ email: email.trim(), password });
@@ -24,6 +24,24 @@ export default function SignInPage() {
         setError(authError.message || 'Something went wrong. Please try again.');
         return;
       }
+
+      // Brand-new sign-ups don't have a household yet. Rather than bouncing
+      // them to a separate "start your household" page/button, create it
+      // for them right here so entering an email + password takes them
+      // straight to the dashboard. (Existing users signing in already have
+      // one — this only ever runs on first sign-up.)
+      if (kind === 'sign_up' && authData.session) {
+        const namePrefix = email.trim().split('@')[0] || 'My';
+        const { error: householdError } = await supabase.rpc('fn_create_household', {
+          p_name: `${namePrefix}'s Household`,
+          p_display_name: namePrefix,
+        });
+        if (householdError) {
+          setError(householdError.message || "Account created, but we couldn't set up your household. Please try signing in again.");
+          return;
+        }
+      }
+
       await refresh();
       router.push('/dashboard');
     } catch (err) {
