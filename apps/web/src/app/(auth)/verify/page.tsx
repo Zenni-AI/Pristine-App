@@ -1,10 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useApp } from '@/components/providers/AppProviders';
+import { Button, Input } from '@/components/ui';
 
 export default function VerifyPage() {
+  // useSearchParams() opts the tree below it out of static prerendering unless
+  // wrapped in Suspense — without this, `next build` fails on this page even
+  // though `next dev` never shows the problem.
+  return (
+    <Suspense>
+      <VerifyForm />
+    </Suspense>
+  );
+}
+
+function VerifyForm() {
   const { supabase, refresh } = useApp();
   const router = useRouter();
   const params = useSearchParams();
@@ -25,26 +37,22 @@ export default function VerifyPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-6 text-textPrimary">
-      <div className="w-full max-w-sm">
-        <h1 className="mb-1 text-2xl font-bold">Check your email</h1>
-        <p className="mb-8 text-textSecondary">We sent a 6-digit code to {email}</p>
+      <div className="w-full max-w-sm animate-fade-in-up">
+        <h1 className="mb-1 text-page-title text-textPrimary">Check your email</h1>
+        <p className="mb-8 text-body text-textSecondary">We sent a 6-digit code to {email}</p>
 
-        <input
-          className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-center text-2xl tracking-[0.5em] text-textPrimary outline-none focus:border-accent"
+        <Input
+          className="text-center text-2xl tracking-[0.5em]"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           maxLength={6}
           placeholder="123456"
         />
-        {error && <p className="mt-2 text-sm text-danger">{error}</p>}
+        {error && <p className="mb-2 text-secondary text-danger">{error}</p>}
 
-        <button
-          className="mt-4 w-full rounded-xl bg-accent py-3 font-semibold text-white hover:bg-accentGlow disabled:opacity-50"
-          onClick={handleVerify}
-          disabled={verifying || code.length < 6}
-        >
+        <Button fullWidth onClick={handleVerify} disabled={verifying || code.length < 6}>
           {verifying ? 'Verifying…' : 'Verify'}
-        </button>
+        </Button>
       </div>
     </main>
   );

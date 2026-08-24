@@ -2,6 +2,7 @@
 
 import { SEAT_PRICES, formatCents } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
+import { Avatar, Button, Card, PageHeader } from '@/components/ui';
 
 export default function SettingsPage() {
   const { supabase, household, member, role, capabilities } = useApp();
@@ -9,43 +10,40 @@ export default function SettingsPage() {
   const seat = SEAT_PRICES[role];
 
   return (
-    <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">Settings</h1>
-
-      <Card title="Your profile">
-        <p className="font-semibold">{member.display_name}</p>
-        <p className="text-sm text-textSecondary">{seat.label}</p>
-      </Card>
-
-      {capabilities?.canManageAccounts && (
-        <Card title="Household">
-          <p className="text-xs text-textSecondary">Invite code</p>
-          <p className="text-2xl font-extrabold tracking-widest text-accentGlow">{household.invite_code}</p>
-          <p className="mt-2 text-xs text-textSecondary">Share this so other family members can join with the right role.</p>
+    <div>
+      <PageHeader title="Settings" />
+      <div className="flex flex-col gap-4">
+        <Card title="Your profile">
+          <div className="flex items-center gap-3">
+            <Avatar name={member.display_name} />
+            <div>
+              <p className="text-body font-semibold text-textPrimary">{member.display_name}</p>
+              <p className="text-secondary text-textSecondary">{seat.label}</p>
+            </div>
+          </div>
         </Card>
-      )}
 
-      {capabilities?.canViewFinance && (
-        <Card title="Billing">
-          <p className="text-sm text-textSecondary">Your seat</p>
-          <p className="font-semibold">
-            {seat.label} — {formatCents(seat.monthlyCents)}/mo
-          </p>
-        </Card>
-      )}
+        {capabilities?.canManageAccounts && (
+          <Card title="Household">
+            <p className="text-secondary text-textSecondary">Invite code</p>
+            <p className="mt-1 text-page-title tracking-widest text-accent">{household.invite_code}</p>
+            <p className="mt-2 text-secondary text-textSecondary">Share this so other family members can join with the right role.</p>
+          </Card>
+        )}
 
-      <button className="mt-4 text-sm font-semibold text-danger" onClick={() => supabase.auth.signOut()}>
-        Sign out
-      </button>
-    </div>
-  );
-}
+        {capabilities?.canViewFinance && (
+          <Card title="Billing">
+            <p className="text-secondary text-textSecondary">Your seat</p>
+            <p className="text-body font-semibold text-textPrimary">
+              {seat.label} — {formatCents(seat.monthlyCents)}/mo
+            </p>
+          </Card>
+        )}
 
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-4 rounded-2xl border border-border bg-surface p-5">
-      <h2 className="mb-2 text-sm font-bold">{title}</h2>
-      {children}
+        <Button variant="ghost" className="w-fit !text-danger" onClick={() => supabase.auth.signOut()}>
+          Sign out
+        </Button>
+      </div>
     </div>
   );
 }

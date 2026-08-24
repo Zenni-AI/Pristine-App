@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { MemberRole } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
+import { Button, Input } from '@/components/ui';
 
 const JOINABLE_ROLES: { role: MemberRole; label: string }[] = [
   { role: 'second_admin', label: 'Second Admin (spouse/partner)' },
@@ -51,43 +52,41 @@ export default function JoinPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-6 text-textPrimary">
-      <div className="w-full max-w-sm">
-        <h1 className="mb-6 text-2xl font-bold">{mode === 'create' ? 'Start your household' : 'Join a household'}</h1>
+      <div className="w-full max-w-sm animate-fade-in-up">
+        <h1 className="mb-6 text-page-title text-textPrimary">{mode === 'create' ? 'Start your household' : 'Join a household'}</h1>
 
-        <div className="mb-6 flex gap-1 rounded-xl bg-surface p-1">
+        <div className="mb-6 flex gap-1 rounded-md bg-surfaceSunken p-1">
           <button
-            className={`flex-1 rounded-lg py-2 text-sm font-semibold ${mode === 'create' ? 'bg-accent text-white' : 'text-textSecondary'}`}
+            className={`flex-1 rounded-sm py-2 text-secondary font-semibold ${mode === 'create' ? 'bg-surface text-textPrimary shadow-card' : 'text-textSecondary'}`}
             onClick={() => setMode('create')}
           >
             New household
           </button>
           <button
-            className={`flex-1 rounded-lg py-2 text-sm font-semibold ${mode === 'join' ? 'bg-accent text-white' : 'text-textSecondary'}`}
+            className={`flex-1 rounded-sm py-2 text-secondary font-semibold ${mode === 'join' ? 'bg-surface text-textPrimary shadow-card' : 'text-textSecondary'}`}
             onClick={() => setMode('join')}
           >
             I have a code
           </button>
         </div>
 
-        <label className="mb-2 block text-sm text-textSecondary">Your name</label>
-        <input className="mb-4 w-full rounded-xl border border-border bg-surface px-4 py-3" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+        <Input label="Your name" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
 
         {mode === 'create' ? (
           <>
-            <label className="mb-2 block text-sm text-textSecondary">Household name</label>
-            <input className="mb-2 w-full rounded-xl border border-border bg-surface px-4 py-3" value={householdName} onChange={(e) => setHouseholdName(e.target.value)} />
-            <p className="text-xs text-textSecondary">You'll be the Primary Admin.</p>
+            <Input label="Household name" value={householdName} onChange={(e) => setHouseholdName(e.target.value)} hint="You'll be the Primary Admin." />
           </>
         ) : (
           <>
-            <label className="mb-2 block text-sm text-textSecondary">Invite code</label>
-            <input className="mb-4 w-full rounded-xl border border-border bg-surface px-4 py-3 uppercase" value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} />
-            <label className="mb-2 block text-sm text-textSecondary">Your role</label>
+            <Input label="Invite code" className="uppercase" value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} />
+            <label className="mb-2 block text-secondary font-medium text-textSecondary">Your role</label>
             <div className="mb-4 flex flex-col gap-2">
               {JOINABLE_ROLES.map((r) => (
                 <button
                   key={r.role}
-                  className={`rounded-xl border px-4 py-3 text-left text-sm ${role === r.role ? 'border-accent bg-surfaceRaised' : 'border-border bg-surface text-textSecondary'}`}
+                  className={`rounded-md border px-4 py-3 text-left text-body ${
+                    role === r.role ? 'border-accent bg-accentSoft text-accent' : 'border-border bg-surface text-textSecondary'
+                  }`}
                   onClick={() => setRole(r.role)}
                 >
                   {r.label}
@@ -97,11 +96,11 @@ export default function JoinPage() {
           </>
         )}
 
-        {error && <p className="mb-2 text-sm text-danger">{error}</p>}
+        {error && <p className="mb-2 text-secondary text-danger">{error}</p>}
 
-        <button className="w-full rounded-xl bg-accent py-3 font-semibold text-white hover:bg-accentGlow disabled:opacity-50" onClick={submit} disabled={submitting}>
+        <Button fullWidth onClick={submit} disabled={submitting}>
           {submitting ? 'Please wait…' : mode === 'create' ? 'Create household' : 'Join household'}
-        </button>
+        </Button>
       </div>
     </main>
   );

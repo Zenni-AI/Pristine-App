@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { MotherboardTask, MealPlanEntry, ProactiveNudge } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
+import { Card, PageHeader, EmptyState, Badge } from '@/components/ui';
 
 export default function DashboardHome() {
   const { supabase, household, member, capabilities } = useApp();
@@ -54,56 +55,56 @@ export default function DashboardHome() {
   if (!member) return null;
 
   return (
-    <div className="mx-auto max-w-3xl">
-      <h1 className="mb-1 text-3xl font-bold">Hey {member.display_name.split(' ')[0]} 👋</h1>
-      <p className="mb-8 text-textSecondary">Here's what's happening today.</p>
+    <div className="flex flex-col gap-5">
+      <PageHeader title={`Good morning, ${member.display_name.split(' ')[0]}.`} subtitle="Here's your household today." />
 
       {nudges.length > 0 && (
         <Card title="Domo noticed">
-          {nudges.map((n) => (
-            <p key={n.id} className="border-t border-border py-2 text-sm first:border-t-0">
-              💡 {n.message}
-            </p>
-          ))}
+          <div className="flex flex-col divide-y divide-border">
+            {nudges.map((n) => (
+              <p key={n.id} className="py-2.5 text-body text-textPrimary first:pt-0 last:pb-0">
+                💡 {n.message}
+              </p>
+            ))}
+          </div>
         </Card>
       )}
 
       {capabilities?.canApproveTasks && pendingApprovals.length > 0 && (
         <Card title={`Waiting on your approval (${pendingApprovals.length})`}>
-          {pendingApprovals.map((t) => (
-            <div key={t.id} className="flex justify-between border-t border-border py-2 text-sm first:border-t-0">
-              <span>{t.title}</span>
-              <span className="font-semibold text-accentGlow">+{t.points} pts</span>
-            </div>
-          ))}
+          <div className="flex flex-col divide-y divide-border">
+            {pendingApprovals.map((t) => (
+              <div key={t.id} className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0">
+                <span className="text-body text-textPrimary">{t.title}</span>
+                <Badge tone="accent">+{t.points} pts</Badge>
+              </div>
+            ))}
+          </div>
         </Card>
       )}
 
       <Card title="Your tasks">
         {myTasks.length === 0 ? (
-          <p className="text-sm text-textSecondary">Nothing due — nice work!</p>
+          <EmptyState message="Nothing due — nice work!" />
         ) : (
-          myTasks.map((t) => (
-            <div key={t.id} className="flex justify-between border-t border-border py-2 text-sm first:border-t-0">
-              <span>{t.title}</span>
-              <span className="font-semibold text-accentGlow">+{t.points} pts</span>
-            </div>
-          ))
+          <div className="flex flex-col divide-y divide-border">
+            {myTasks.map((t) => (
+              <div key={t.id} className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0">
+                <span className="text-body text-textPrimary">{t.title}</span>
+                <Badge tone="accent">+{t.points} pts</Badge>
+              </div>
+            ))}
+          </div>
         )}
       </Card>
 
       <Card title="Tonight's dinner">
-        <p className="text-sm">{tonightsDinner ? tonightsDinner.title : 'Not planned yet'}</p>
+        {tonightsDinner ? (
+          <p className="text-body text-textPrimary">{tonightsDinner.title}</p>
+        ) : (
+          <EmptyState message="Nothing planned for dinner yet. Add a meal or let Motherboard suggest one." />
+        )}
       </Card>
-    </div>
-  );
-}
-
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-4 rounded-2xl border border-border bg-surface p-5">
-      <h2 className="mb-2 text-sm font-bold">{title}</h2>
-      {children}
     </div>
   );
 }

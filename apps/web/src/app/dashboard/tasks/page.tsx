@@ -3,13 +3,22 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { MotherboardTask, HouseholdMember } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
+import { Button, Card, PageHeader, EmptyState, Badge } from '@/components/ui';
 
 const STATUS_LABEL: Record<MotherboardTask['status'], string> = {
   assigned: 'To do',
   submitted: 'Waiting on approval',
-  approved: 'Done ✅',
+  approved: 'Done',
   rejected: 'Needs redo',
   overdue: 'Overdue',
+};
+
+const STATUS_TONE: Record<MotherboardTask['status'], 'neutral' | 'warning' | 'success' | 'danger'> = {
+  assigned: 'neutral',
+  submitted: 'warning',
+  approved: 'success',
+  rejected: 'danger',
+  overdue: 'danger',
 };
 
 export default function TasksPage() {
@@ -47,37 +56,47 @@ export default function TasksPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl">
-      <h1 className="mb-6 text-2xl font-bold">{capabilities?.fullVisibility ? 'Chores & Tasks' : 'My Tasks'}</h1>
-      <div className="flex flex-col gap-3">
-        {tasks.length === 0 && <p className="text-textSecondary">No tasks yet.</p>}
-        {tasks.map((t) => (
-          <div key={t.id} className="rounded-2xl border border-border bg-surface p-4">
-            <div className="flex justify-between">
-              <span className="font-semibold">{t.title}</span>
-              <span className="font-semibold text-accentGlow">+{t.points} pts</span>
-            </div>
-            {capabilities?.fullVisibility && <p className="mt-1 text-xs text-textSecondary">Assigned to {memberName(t.assigned_to)}</p>}
-            <p className="mt-2 text-xs font-semibold text-warning">{STATUS_LABEL[t.status]}</p>
-
-            {t.status === 'assigned' && t.assigned_to === member?.id && (
-              <button className="mt-3 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white" onClick={() => submitTask(t.id)}>
-                Mark complete
-              </button>
-            )}
-            {capabilities?.canApproveTasks && t.status === 'submitted' && (
-              <div className="mt-3 flex gap-2">
-                <button className="flex-1 rounded-lg bg-success px-4 py-2 text-sm font-semibold text-white" onClick={() => decideTask(t, true)}>
-                  Approve
-                </button>
-                <button className="flex-1 rounded-lg bg-danger px-4 py-2 text-sm font-semibold text-white" onClick={() => decideTask(t, false)}>
-                  Send back
-                </button>
+    <div>
+      <PageHeader title={capabilities?.fullVisibility ? 'Chores & Tasks' : 'My Tasks'} />
+      {tasks.length === 0 ? (
+        <Card>
+          <EmptyState message="No tasks yet. Add one to get the household moving." />
+        </Card>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {tasks.map((t) => (
+            <Card key={t.id}>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-body font-semibold text-textPrimary">{t.title}</p>
+                  {capabilities?.fullVisibility && <p className="mt-0.5 text-secondary text-textSecondary">Assigned to {memberName(t.assigned_to)}</p>}
+                </div>
+                <Badge tone="accent">+{t.points} pts</Badge>
               </div>
-            )}
-          </div>
-        ))}
-      </div>
+              <div className="mt-3 flex items-center justify-between">
+                <Badge tone={STATUS_TONE[t.status]}>{STATUS_LABEL[t.status]}</Badge>
+                <div className="flex gap-2">
+                  {t.status === 'assigned' && t.assigned_to === member?.id && (
+                    <Button size="sm" onClick={() => submitTask(t.id)}>
+                      Mark complete
+                    </Button>
+                  )}
+                  {capabilities?.canApproveTasks && t.status === 'submitted' && (
+                    <>
+                      <Button size="sm" variant="secondary" onClick={() => decideTask(t, false)}>
+                        Send back
+                      </Button>
+                      <Button size="sm" onClick={() => decideTask(t, true)}>
+                        Approve
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

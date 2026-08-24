@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ChatMessage } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
+import { PageHeader } from '@/components/ui';
 
 export default function FamilyChatPage() {
   const { supabase, household, member } = useApp();
@@ -55,17 +56,17 @@ export default function FamilyChatPage() {
   };
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-4rem)] max-w-2xl flex-col">
-      <h1 className="mb-4 text-2xl font-bold">Family Chat</h1>
-      <div className="flex-1 overflow-y-auto rounded-2xl border border-border bg-surface p-4">
+    <div className="flex h-[calc(100vh-5rem)] flex-col">
+      <PageHeader title="Family Chat" />
+      <div className="flex-1 overflow-y-auto rounded-lg border border-border bg-surface p-5 shadow-card">
         {messages.map((m) => {
           const mine = m.sender_member_id === member?.id;
           const isSystem = m.sender_member_id === null;
           return (
-            <div key={m.id} className={`mb-2 flex ${mine ? 'justify-end' : isSystem ? 'justify-center' : 'justify-start'}`}>
+            <div key={m.id} className={`mb-2.5 flex ${mine ? 'justify-end' : isSystem ? 'justify-center' : 'justify-start'}`}>
               <div
-                className={`max-w-[70%] rounded-2xl px-4 py-2 text-sm ${
-                  mine ? 'bg-accent text-white' : isSystem ? 'bg-surfaceRaised text-textSecondary italic' : 'bg-surfaceRaised text-textPrimary'
+                className={`max-w-[70%] rounded-lg px-4 py-2.5 text-body ${
+                  mine ? 'bg-accent text-textOnAccent' : isSystem ? 'bg-surfaceSunken text-textSecondary italic' : 'bg-surfaceSunken text-textPrimary'
                 }`}
               >
                 {m.body}
@@ -77,13 +78,13 @@ export default function FamilyChatPage() {
       </div>
       <div className="mt-4 flex gap-2">
         <input
-          className="flex-1 rounded-full border border-border bg-surface px-4 py-3 outline-none focus:border-accent"
+          className="flex-1 rounded-md border border-border bg-surfaceSunken px-4 py-3 text-body text-textPrimary outline-none placeholder:text-textTertiary focus:border-accent focus:bg-surface"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && send()}
           placeholder="Message the family…"
         />
-        <button className="rounded-full bg-accent px-5 py-3 font-semibold text-white hover:bg-accentGlow" onClick={send}>
+        <button className="rounded-md bg-accent px-5 py-3 text-body font-semibold text-textOnAccent hover:bg-accentHover" onClick={send}>
           Send
         </button>
       </div>

@@ -4,6 +4,38 @@
 
 html,
 body {
-  background-color: #0b0e14;
-  color: #f4f6fb;
+  background-color: #faf6f1;
+  color: #2b2520;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* A calm, brief transition on interactive elements — never on layout-shifting properties. */
+button,
+a,
+input,
+textarea {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 200ms ease both;
 }
