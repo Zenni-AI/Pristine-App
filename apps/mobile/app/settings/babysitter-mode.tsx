@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, Switch, Alert } from 'react-native';
-import { BABYSITTER_UNLOCK_ITEMS, BABYSITTER_UNLOCK_LABELS, type BabysitterUnlockItem, type HouseholdMember, type BabysitterSession } from '@domo/shared';
+import { BABYSITTER_UNLOCK_ITEMS, BABYSITTER_UNLOCK_LABELS, type BabysitterUnlockItem, type HouseholdMember, type BabysitterSession } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useHouseholdMembers } from '@/lib/useHouseholdMembers';
 import { supabase } from '@/lib/supabase';

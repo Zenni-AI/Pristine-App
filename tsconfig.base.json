@@ -14,8 +14,8 @@
     "declaration": false,
     "baseUrl": ".",
     "paths": {
-      "@domo/shared": ["packages/shared/src/index.ts"],
-      "@domo/shared/*": ["packages/shared/src/*"]
+      "@motherboard/shared": ["packages/shared/src/index.ts"],
+      "@motherboard/shared/*": ["packages/shared/src/*"]
     }
   }
 }

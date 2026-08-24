@@ -35,7 +35,7 @@ export interface HouseholdMember {
 export type TaskCategory = 'chore' | 'punishment' | 'reading' | 'responsibility' | 'reminder';
 export type TaskStatus = 'assigned' | 'submitted' | 'approved' | 'rejected' | 'overdue';
 
-export interface DomoTask {
+export interface MotherboardTask {
   id: string;
   household_id: string;
   assigned_to: string;
@@ -70,7 +70,7 @@ export interface ChatThread {
 export interface ChatMessage {
   id: string;
   thread_id: string;
-  sender_member_id: string | null; // null = Domo AI system message
+  sender_member_id: string | null; // null = Motherboard AI system message
   kind: MessageKind;
   body: string | null;
   photo_url: string | null;

@@ -9,7 +9,7 @@ const TWILIO_ACCOUNT_SID = Deno.env.get('TWILIO_ACCOUNT_SID')!;
 const TWILIO_AUTH_TOKEN = Deno.env.get('TWILIO_AUTH_TOKEN')!;
 const TWILIO_FROM_NUMBER = Deno.env.get('TWILIO_FROM_NUMBER')!;
 const SENDGRID_API_KEY = Deno.env.get('SENDGRID_API_KEY');
-const NOTIFY_FROM_EMAIL = Deno.env.get('NOTIFY_FROM_EMAIL') ?? 'domo@example.com';
+const NOTIFY_FROM_EMAIL = Deno.env.get('NOTIFY_FROM_EMAIL') ?? 'motherboard@example.com';
 
 interface NotifyRequest {
   householdId: string;
@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     const results: Record<string, unknown> = {};
 
     if (!prefs || prefs.push_enabled) {
-      results.push = await sendExpoPush(prefs?.push_token, subject ?? 'Domo', body);
+      results.push = await sendExpoPush(prefs?.push_token, subject ?? 'Motherboard', body);
       await logNotification(supabase, { householdId, memberId, channel: 'push', subject, body, nudgeId, status: results.push ? 'sent' : 'failed' });
     }
 
@@ -40,7 +40,7 @@ Deno.serve(async (req) => {
     }
 
     if (prefs?.email_enabled && prefs.email && SENDGRID_API_KEY) {
-      const ok = await sendEmail(prefs.email, subject ?? 'Domo', body);
+      const ok = await sendEmail(prefs.email, subject ?? 'Motherboard', body);
       await logNotification(supabase, { householdId, memberId, channel: 'email', subject, body, nudgeId, status: ok ? 'sent' : 'failed' });
     }
 
@@ -81,7 +81,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<boo
     headers: { Authorization: `Bearer ${SENDGRID_API_KEY}`, 'content-type': 'application/json' },
     body: JSON.stringify({
       personalizations: [{ to: [{ email: to }] }],
-      from: { email: NOTIFY_FROM_EMAIL, name: 'Domo' },
+      from: { email: NOTIFY_FROM_EMAIL, name: 'Motherboard' },
       subject,
       content: [{ type: 'text/plain', value: body }],
     }),

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Baseline role grants for PostgREST access.
+-- Motherboard — Baseline role grants for PostgREST access.
 --
 -- RLS policies (defined throughout 0001–0014) only ever RESTRICT access on
 -- top of a baseline table-level privilege; they don't grant one. Tables

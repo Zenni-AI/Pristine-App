@@ -55,7 +55,7 @@ export default function SignInPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-6 text-textPrimary">
       <div className="w-full max-w-sm">
-        <h1 className="mb-1 text-3xl font-bold">Domo</h1>
+        <h1 className="mb-1 text-3xl font-bold">Motherboard</h1>
         <p className="mb-8 text-textSecondary">Sign in to your household</p>
 
         <label className="mb-2 block text-sm text-textSecondary">Email</label>

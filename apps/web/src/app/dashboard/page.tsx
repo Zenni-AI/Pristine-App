@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { DomoTask, MealPlanEntry, ProactiveNudge } from '@domo/shared';
+import type { MotherboardTask, MealPlanEntry, ProactiveNudge } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
 export default function DashboardHome() {
   const { supabase, household, member, capabilities } = useApp();
-  const [myTasks, setMyTasks] = useState<DomoTask[]>([]);
-  const [pendingApprovals, setPendingApprovals] = useState<DomoTask[]>([]);
+  const [myTasks, setMyTasks] = useState<MotherboardTask[]>([]);
+  const [pendingApprovals, setPendingApprovals] = useState<MotherboardTask[]>([]);
   const [tonightsDinner, setTonightsDinner] = useState<MealPlanEntry | null>(null);
   const [nudges, setNudges] = useState<ProactiveNudge[]>([]);
 
@@ -20,7 +20,7 @@ export default function DashboardHome() {
       .eq('household_id', household.id)
       .eq('assigned_to', member.id)
       .in('status', ['assigned', 'rejected'])
-      .then(({ data }) => setMyTasks((data as DomoTask[]) ?? []));
+      .then(({ data }) => setMyTasks((data as MotherboardTask[]) ?? []));
 
     if (capabilities?.canApproveTasks) {
       supabase
@@ -28,7 +28,7 @@ export default function DashboardHome() {
         .select('*')
         .eq('household_id', household.id)
         .eq('status', 'submitted')
-        .then(({ data }) => setPendingApprovals((data as DomoTask[]) ?? []));
+        .then(({ data }) => setPendingApprovals((data as MotherboardTask[]) ?? []));
     }
 
     const today = new Date().toISOString().slice(0, 10);

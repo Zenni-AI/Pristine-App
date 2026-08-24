@@ -1,6 +1,6 @@
 import { createClient, type SupabaseClient, type SupabaseClientOptions } from '@supabase/supabase-js';
 
-export interface DomoSupabaseConfig {
+export interface MotherboardSupabaseConfig {
   url: string;
   anonKey: string;
   /** Platform-specific storage adapter — AsyncStorage on RN, localStorage/cookies on web. */
@@ -13,7 +13,7 @@ export interface DomoSupabaseConfig {
  * each hand-rolling a client, so query behavior (retries, headers) stays
  * identical across platforms.
  */
-export function createDomoSupabaseClient(config: DomoSupabaseConfig): SupabaseClient {
+export function createMotherboardSupabaseClient(config: MotherboardSupabaseConfig): SupabaseClient {
   return createClient(config.url, config.anonKey, {
     auth: {
       persistSession: true,

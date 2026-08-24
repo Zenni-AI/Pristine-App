@@ -3,8 +3,8 @@ import { AppProviders } from '@/components/providers/AppProviders';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Domo — Your family’s AI life & home butler',
-  description: 'Domo manages your family’s schedule, chores, home, finances, and more — proactively, from day one.',
+  title: 'Motherboard — Your family’s AI life & home butler',
+  description: 'Motherboard manages your family’s schedule, chores, home, finances, and more — proactively, from day one.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

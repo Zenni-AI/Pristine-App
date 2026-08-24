@@ -62,7 +62,7 @@ export const ONBOARDING_TOPIC_COPY: Record<OnboardingTopic, { title: string; pro
   },
 };
 
-/** "I don't know" / skip is always a valid answer — Domo follows up later. */
+/** "I don't know" / skip is always a valid answer — Motherboard follows up later. */
 export const SKIP_PHRASES = ["i don't know", 'skip', 'not sure', 'later', "i'll do it later"];
 
 export function isSkipAnswer(text: string): boolean {

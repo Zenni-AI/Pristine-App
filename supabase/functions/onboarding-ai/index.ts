@@ -1,4 +1,4 @@
-// Domo onboarding conversation — turns a raw answer into a warm, in-character
+// Motherboard onboarding conversation — turns a raw answer into a warm, in-character
 // reply using Claude. Called from apps/mobile/src/lib/onboarding.ts and the
 // web equivalent. Deploy with: supabase functions deploy onboarding-ai
 import { corsHeaders } from '../_shared/cors.ts';

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Finance: bills, expenses, subscriptions, insurance, tax reminders,
+-- Motherboard — Finance: bills, expenses, subscriptions, insurance, tax reminders,
 -- shopping budget tracking. Financial detail defaults to admin+adult visible,
 -- hidden from kid role at the application layer (kids see only their own
 -- allowance/points, never household bills).

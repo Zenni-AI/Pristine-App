@@ -6,7 +6,7 @@ import {
   type Household,
   type MemberRole,
   type RoleCapabilities,
-} from '@domo/shared';
+} from '@motherboard/shared';
 import { supabase } from './supabase';
 import { useAuth } from './AuthProvider';
 

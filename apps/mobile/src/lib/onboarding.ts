@@ -1,4 +1,4 @@
-import { isSkipAnswer, type OnboardingTopic } from '@domo/shared';
+import { isSkipAnswer, type OnboardingTopic } from '@motherboard/shared';
 import { supabase } from './supabase';
 
 /**
@@ -31,12 +31,12 @@ export async function saveOnboardingAnswer(
 
 /**
  * Calls the onboarding AI edge function to turn a free-text answer into a
- * warm, in-character Domo reply and (server-side) structured data to write
+ * warm, in-character Motherboard reply and (server-side) structured data to write
  * into the right domain tables (vehicles, kids, etc). Falls back to a canned
  * reply if the function isn't reachable yet (e.g. local dev without it
  * deployed), so the conversational flow still works end-to-end.
  */
-export async function getDomoReply(topicPrompt: string, userAnswer: string): Promise<string> {
+export async function getMotherboardReply(topicPrompt: string, userAnswer: string): Promise<string> {
   try {
     const { data, error } = await supabase.functions.invoke('onboarding-ai', {
       body: { topicPrompt, userAnswer },

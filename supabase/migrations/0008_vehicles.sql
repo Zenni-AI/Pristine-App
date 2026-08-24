@@ -1,8 +1,8 @@
 -- ============================================================================
--- Domo — Vehicles: service history, registration, insurance, reminders.
+-- Motherboard — Vehicles: service history, registration, insurance, reminders.
 -- Onboarding may capture a vehicle with unknown last-service-date; that's
 -- tracked via onboarding_progress + fn_needs_followup below instead of a
--- hard requirement, so Domo can nudge later ("do you know your last oil
+-- hard requirement, so Motherboard can nudge later ("do you know your last oil
 -- change?") without blocking setup.
 -- ============================================================================
 
@@ -16,7 +16,7 @@ create table vehicles (
   vin text,
   primary_driver_id uuid references household_members(id),
   last_oil_change_on date,
-  last_oil_change_unknown boolean not null default false,   -- flips true -> Domo follows up later
+  last_oil_change_unknown boolean not null default false,   -- flips true -> Motherboard follows up later
   oil_change_interval_miles integer default 5000,
   registration_expires_on date,
   registration_sticker_location text,    -- "glovebox", "rear bumper", etc.

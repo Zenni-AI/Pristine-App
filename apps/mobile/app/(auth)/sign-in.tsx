@@ -31,7 +31,7 @@ export default function SignIn() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={styles.brandBlock}>
-        <Text style={styles.logo}>Domo</Text>
+        <Text style={styles.logo}>Motherboard</Text>
         <Text style={styles.tagline}>Your family's AI life & home butler</Text>
       </View>
 

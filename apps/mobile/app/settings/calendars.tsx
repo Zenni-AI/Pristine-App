@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import type { CalendarConnection } from '@domo/shared';
+import type { CalendarConnection } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { supabase } from '@/lib/supabase';
 import { colors } from '@/theme/colors';
@@ -14,7 +14,7 @@ const PROVIDERS: { id: 'google' | 'outlook' | 'apple'; label: string }[] = [
 /**
  * Two-way calendar sync. Connecting kicks off an OAuth flow (Google/Outlook)
  * handled by the `calendar-oauth-start` edge function, which redirects back
- * into the app via the `domo://auth-callback` deep link registered in
+ * into the app via the `motherboard://auth-callback` deep link registered in
  * app.json; Apple Calendar uses device-native EventKit instead of OAuth.
  */
 export default function Calendars() {
@@ -51,7 +51,7 @@ export default function Calendars() {
           </Pressable>
         </View>
       ))}
-      <Text style={styles.hint}>Events sync both ways — anything added in Domo shows up in your calendar and vice versa.</Text>
+      <Text style={styles.hint}>Events sync both ways — anything added in Motherboard shows up in your calendar and vice versa.</Text>
     </View>
   );
 }

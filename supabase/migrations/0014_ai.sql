@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Proactive AI butler: conversation log, learned family patterns,
+-- Motherboard — Proactive AI butler: conversation log, learned family patterns,
 -- proactive nudge queue, voice sessions, and outbound notification log.
 -- This is the substrate the Anthropic-powered "brain" reads/writes so it can
 -- anticipate needs instead of waiting to be asked.
@@ -7,7 +7,7 @@
 
 create type nudge_status as enum ('pending', 'sent', 'dismissed', 'actioned', 'snoozed');
 
--- Every proactive idea Domo has ("It's been 3 months, oil change?") is a row
+-- Every proactive idea Motherboard has ("It's been 3 months, oil change?") is a row
 -- here before it's delivered, so we never re-nudge the same thing constantly.
 create table proactive_nudges (
   id uuid primary key default uuid_generate_v4(),
@@ -47,7 +47,7 @@ create table ai_messages (
 
 create index idx_ai_messages_conversation on ai_messages(conversation_id, created_at);
 
--- Learned family patterns — Domo gets smarter over time. Simple key/value
+-- Learned family patterns — Motherboard gets smarter over time. Simple key/value
 -- facts + confidence score, e.g. {"date_night_day":"Thursday","confidence":0.8}
 create table family_patterns (
   id uuid primary key default uuid_generate_v4(),

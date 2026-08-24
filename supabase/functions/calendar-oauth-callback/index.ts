@@ -9,7 +9,7 @@ const GOOGLE_CLIENT_SECRET = Deno.env.get('GOOGLE_OAUTH_CLIENT_SECRET')!;
 const MICROSOFT_CLIENT_ID = Deno.env.get('MICROSOFT_OAUTH_CLIENT_ID')!;
 const MICROSOFT_CLIENT_SECRET = Deno.env.get('MICROSOFT_OAUTH_CLIENT_SECRET')!;
 const REDIRECT_BASE = Deno.env.get('SUPABASE_URL')! + '/functions/v1/calendar-oauth-callback';
-const APP_DEEP_LINK = 'domo://settings/calendars';
+const APP_DEEP_LINK = 'motherboard://settings/calendars';
 
 Deno.serve(async (req) => {
   const url = new URL(req.url);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { HouseholdMember } from '@domo/shared';
+import type { HouseholdMember } from '@motherboard/shared';
 import { supabase } from './supabase';
 
 export function useHouseholdMembers(householdId: string | undefined) {

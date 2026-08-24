@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
-import { DEFAULT_QUICK_REPLIES, type ChatMessage } from '@domo/shared';
+import { DEFAULT_QUICK_REPLIES, type ChatMessage } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useHouseholdMembers } from '@/lib/useHouseholdMembers';
 import { supabase } from '@/lib/supabase';
@@ -20,7 +20,7 @@ export default function FamilyChat() {
 
   const memberName = useMemo(() => {
     const map = new Map(members.map((m) => [m.id, m.display_name]));
-    return (id: string | null) => (id ? map.get(id) ?? 'Member' : 'Domo');
+    return (id: string | null) => (id ? map.get(id) ?? 'Member' : 'Motherboard');
   }, [members]);
 
   useEffect(() => {

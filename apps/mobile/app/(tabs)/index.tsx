@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
 import { router } from 'expo-router';
-import type { DomoTask, MealPlanEntry, ProactiveNudge } from '@domo/shared';
+import type { MotherboardTask, MealPlanEntry, ProactiveNudge } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { supabase } from '@/lib/supabase';
 import { SectionCard } from '@/components/SectionCard';
@@ -10,8 +10,8 @@ import { colors } from '@/theme/colors';
 
 export default function Dashboard() {
   const { household, member, role, capabilities, isYoungKidUi } = useHousehold();
-  const [myTasks, setMyTasks] = useState<DomoTask[]>([]);
-  const [pendingApprovals, setPendingApprovals] = useState<DomoTask[]>([]);
+  const [myTasks, setMyTasks] = useState<MotherboardTask[]>([]);
+  const [pendingApprovals, setPendingApprovals] = useState<MotherboardTask[]>([]);
   const [tonightsDinner, setTonightsDinner] = useState<MealPlanEntry | null>(null);
   const [nudges, setNudges] = useState<ProactiveNudge[]>([]);
 
@@ -25,7 +25,7 @@ export default function Dashboard() {
       .eq('assigned_to', member.id)
       .in('status', ['assigned', 'rejected'])
       .order('due_at', { ascending: true })
-      .then(({ data }) => setMyTasks((data as DomoTask[]) ?? []));
+      .then(({ data }) => setMyTasks((data as MotherboardTask[]) ?? []));
 
     if (capabilities?.canApproveTasks) {
       supabase
@@ -33,7 +33,7 @@ export default function Dashboard() {
         .select('*')
         .eq('household_id', household.id)
         .eq('status', 'submitted')
-        .then(({ data }) => setPendingApprovals((data as DomoTask[]) ?? []));
+        .then(({ data }) => setPendingApprovals((data as MotherboardTask[]) ?? []));
     }
 
     const today = new Date().toISOString().slice(0, 10);

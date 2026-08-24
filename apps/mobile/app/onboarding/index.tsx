@@ -1,14 +1,14 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { router } from 'expo-router';
-import { ONBOARDING_TOPICS, ONBOARDING_TOPIC_COPY, type OnboardingTopic } from '@domo/shared';
+import { ONBOARDING_TOPICS, ONBOARDING_TOPIC_COPY, type OnboardingTopic } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
-import { saveOnboardingAnswer, getDomoReply } from '@/lib/onboarding';
+import { saveOnboardingAnswer, getMotherboardReply } from '@/lib/onboarding';
 import { colors } from '@/theme/colors';
 
 interface ChatBubble {
   id: string;
-  from: 'domo' | 'user';
+  from: 'motherboard' | 'user';
   text: string;
 }
 
@@ -30,10 +30,10 @@ export default function Onboarding() {
   const [messages, setMessages] = useState<ChatBubble[]>(() => [
     {
       id: 'intro',
-      from: 'domo',
+      from: 'motherboard',
       text: "Hi, I'm Domo 👋 I'm going to help run your household — meals, chores, vehicles, health, all of it. Let's get to know your family a bit. You can skip anything and I'll ask again later.",
     },
-    { id: `prompt-0`, from: 'domo', text: ONBOARDING_TOPIC_COPY[ONBOARDING_TOPICS[0]].prompt },
+    { id: `prompt-0`, from: 'motherboard', text: ONBOARDING_TOPIC_COPY[ONBOARDING_TOPICS[0]].prompt },
   ]);
 
   const progressPct = useMemo(() => Math.round((topicIndex / ONBOARDING_TOPICS.length) * 100), [topicIndex]);
@@ -47,22 +47,22 @@ export default function Onboarding() {
 
     try {
       await saveOnboardingAnswer(household.id, currentTopic, answer);
-      const reply = await getDomoReply(ONBOARDING_TOPIC_COPY[currentTopic].prompt, answer);
-      setMessages((prev) => [...prev, { id: `d-${Date.now()}`, from: 'domo', text: reply }]);
+      const reply = await getMotherboardReply(ONBOARDING_TOPIC_COPY[currentTopic].prompt, answer);
+      setMessages((prev) => [...prev, { id: `d-${Date.now()}`, from: 'motherboard', text: reply }]);
 
       const nextIndex = topicIndex + 1;
       if (nextIndex < ONBOARDING_TOPICS.length) {
         setTopicIndex(nextIndex);
         setMessages((prev) => [
           ...prev,
-          { id: `prompt-${nextIndex}`, from: 'domo', text: ONBOARDING_TOPIC_COPY[ONBOARDING_TOPICS[nextIndex]].prompt },
+          { id: `prompt-${nextIndex}`, from: 'motherboard', text: ONBOARDING_TOPIC_COPY[ONBOARDING_TOPICS[nextIndex]].prompt },
         ]);
       } else {
         setMessages((prev) => [
           ...prev,
           {
             id: 'done',
-            from: 'domo',
+            from: 'motherboard',
             text: "That's everything for now! I'm already set up to start managing your family's life. I'll gently follow up on anything you skipped — one thing at a time, never all at once.",
           },
         ]);
@@ -78,7 +78,7 @@ export default function Onboarding() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Setting up Domo</Text>
+        <Text style={styles.headerTitle}>Setting up Motherboard</Text>
         <View style={styles.progressTrack}>
           <View style={[styles.progressFill, { width: `${progressPct}%` }]} />
         </View>
@@ -90,8 +90,8 @@ export default function Onboarding() {
         keyExtractor={(m) => m.id}
         contentContainerStyle={{ padding: 20, gap: 12 }}
         renderItem={({ item }) => (
-          <View style={[styles.bubble, item.from === 'domo' ? styles.domoBubble : styles.userBubble]}>
-            <Text style={item.from === 'domo' ? styles.domoText : styles.userText}>{item.text}</Text>
+          <View style={[styles.bubble, item.from === 'motherboard' ? styles.motherboardBubble : styles.userBubble]}>
+            <Text style={item.from === 'motherboard' ? styles.motherboardText : styles.userText}>{item.text}</Text>
           </View>
         )}
         onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
@@ -99,7 +99,7 @@ export default function Onboarding() {
 
       {isComplete ? (
         <Pressable style={styles.primaryButton} onPress={() => router.replace('/(tabs)')}>
-          <Text style={styles.primaryButtonText}>Take me to Domo</Text>
+          <Text style={styles.primaryButtonText}>Take me to Motherboard</Text>
         </Pressable>
       ) : (
         <View style={styles.inputRow}>
@@ -128,9 +128,9 @@ const styles = StyleSheet.create({
   progressTrack: { height: 4, backgroundColor: colors.dark.surface, borderRadius: 2, overflow: 'hidden' },
   progressFill: { height: 4, backgroundColor: colors.dark.accent },
   bubble: { maxWidth: '85%', borderRadius: 16, paddingHorizontal: 14, paddingVertical: 10 },
-  domoBubble: { backgroundColor: colors.dark.surface, alignSelf: 'flex-start', borderBottomLeftRadius: 4 },
+  motherboardBubble: { backgroundColor: colors.dark.surface, alignSelf: 'flex-start', borderBottomLeftRadius: 4 },
   userBubble: { backgroundColor: colors.dark.accent, alignSelf: 'flex-end', borderBottomRightRadius: 4 },
-  domoText: { color: colors.dark.textPrimary, fontSize: 15, lineHeight: 21 },
+  motherboardText: { color: colors.dark.textPrimary, fontSize: 15, lineHeight: 21 },
   userText: { color: '#fff', fontSize: 15, lineHeight: 21 },
   inputRow: { flexDirection: 'row', padding: 16, gap: 10, alignItems: 'center' },
   input: {

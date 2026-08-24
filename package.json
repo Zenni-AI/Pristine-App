@@ -1,16 +1,16 @@
 {
-  "name": "domo",
+  "name": "motherboard",
   "private": true,
   "version": "0.1.0",
-  "description": "Domo — full-stack AI life & home management app (mobile + web)",
+  "description": "Motherboard — full-stack AI life & home management app (mobile + web)",
   "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=18.18.0"
   },
   "scripts": {
-    "dev:mobile": "pnpm --filter @domo/mobile start",
-    "dev:web": "pnpm --filter @domo/web dev",
-    "build:web": "pnpm --filter @domo/web build",
+    "dev:mobile": "pnpm --filter @motherboard/mobile start",
+    "dev:web": "pnpm --filter @motherboard/web dev",
+    "build:web": "pnpm --filter @motherboard/web build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "supabase:start": "supabase start",

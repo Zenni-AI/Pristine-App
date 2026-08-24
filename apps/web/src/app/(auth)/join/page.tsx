@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { MemberRole } from '@domo/shared';
+import type { MemberRole } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
 const JOINABLE_ROLES: { role: MemberRole; label: string }[] = [

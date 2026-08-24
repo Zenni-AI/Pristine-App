@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Chat: Family Group Chat + Babysitter Group Chat
+-- Motherboard — Chat: Family Group Chat + Babysitter Group Chat
 -- ============================================================================
 
 create type chat_kind as enum ('family', 'babysitter');
@@ -37,7 +37,7 @@ create table chat_thread_members (
 create table chat_messages (
   id uuid primary key default uuid_generate_v4(),
   thread_id uuid not null references chat_threads(id) on delete cascade,
-  sender_member_id uuid references household_members(id), -- null = Domo AI system message
+  sender_member_id uuid references household_members(id), -- null = Motherboard AI system message
   kind message_kind not null default 'text',
   body text,
   photo_url text,

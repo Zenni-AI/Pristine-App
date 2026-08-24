@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable, Alert } from 'react-native';
-import { SEAT_PRICES, type HouseholdMember } from '@domo/shared';
+import { SEAT_PRICES, type HouseholdMember } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { supabase } from '@/lib/supabase';
 import { colors, roleAccentColors } from '@/theme/colors';
@@ -26,7 +26,7 @@ export default function ManageMembers() {
 
   const removeMember = (m: HouseholdMember) => {
     if (m.id === member?.id) return;
-    Alert.alert('Remove access?', `${m.display_name} will lose access to Domo immediately.`, [
+    Alert.alert('Remove access?', `${m.display_name} will lose access to Motherboard immediately.`, [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Remove',

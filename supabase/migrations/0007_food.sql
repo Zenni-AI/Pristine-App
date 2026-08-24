@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Food: weekly meal planning, dinner menu (visible to whole family),
+-- Motherboard — Food: weekly meal planning, dinner menu (visible to whole family),
 -- grocery/shopping lists, low-item reorder reminders, dinner prep reminders.
 -- ============================================================================
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { BabysitterSession, BabysitterUnlockItem } from '@domo/shared';
+import type { BabysitterSession, BabysitterUnlockItem } from '@motherboard/shared';
 import { useHousehold } from './HouseholdProvider';
 import { supabase } from './supabase';
 

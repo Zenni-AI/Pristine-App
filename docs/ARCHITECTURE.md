@@ -1,12 +1,12 @@
-# Domo — Architecture
+# Motherboard — Architecture
 
-Domo is a monorepo: one Postgres schema (Supabase), one mobile app (Expo /
+Motherboard is a monorepo: one Postgres schema (Supabase), one mobile app (Expo /
 React Native, iOS + Android), one web app (Next.js), and a set of Supabase
 Edge Functions that do everything requiring a secret key (Anthropic,
 ElevenLabs, Stripe, Twilio, OAuth).
 
 ```
-domo/
+motherboard/
 ├── apps/
 │   ├── mobile/            Expo Router app — iOS, Android, and Expo web
 │   └── web/                Next.js App Router site (marketing + full web app)
@@ -79,7 +79,7 @@ automatically alongside the session.
 ### The proactive AI butler
 
 `proactive_nudges`, `family_patterns`, `ai_conversations` / `ai_messages`,
-and `notification_log` (all in `0014_ai.sql`) are the substrate for "Domo
+and `notification_log` (all in `0014_ai.sql`) are the substrate for "Motherboard
 doesn't wait to be asked." The `nudge-scheduler` Edge Function is the
 engine: run it on a schedule (hourly is reasonable) and it scans domain
 tables — vehicles, plants, medications, couple activities, home
@@ -91,7 +91,7 @@ that exact record (so nobody gets nagged twice about the same oil change).
 
 | Function | Purpose | Secrets needed |
 |---|---|---|
-| `onboarding-ai` | Turns a free-text onboarding answer into a warm Domo reply | `ANTHROPIC_API_KEY` |
+| `onboarding-ai` | Turns a free-text onboarding answer into a warm Motherboard reply | `ANTHROPIC_API_KEY` |
 | `voice-assistant` | Full voice loop: ElevenLabs STT → Anthropic reasoning (with household context) → ElevenLabs TTS → Storage upload | `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY` |
 | `provision-babysitter` | Service-role creation of a babysitter's temporary auth user + membership | `SUPABASE_SERVICE_ROLE_KEY` |
 | `stripe-checkout` | Creates a Checkout Session for a seat/bundle purchase | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_*` |
@@ -112,7 +112,7 @@ Use [Supabase Scheduled Functions](https://supabase.com/docs/guides/functions/sc
 
 ```sql
 select cron.schedule(
-  'domo-nudge-scheduler-hourly',
+  'motherboard-nudge-scheduler-hourly',
   '0 * * * *',
   $$ select net.http_post(
     url := 'https://<project>.functions.supabase.co/nudge-scheduler',

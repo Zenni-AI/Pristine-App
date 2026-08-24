@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable, Modal, TextInput, ScrollView } from 'react-native';
-import type { DomoTask } from '@domo/shared';
+import type { MotherboardTask } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useHouseholdMembers } from '@/lib/useHouseholdMembers';
 import { supabase } from '@/lib/supabase';
 import { colors } from '@/theme/colors';
 
-const STATUS_LABEL: Record<DomoTask['status'], string> = {
+const STATUS_LABEL: Record<MotherboardTask['status'], string> = {
   assigned: 'To do',
   submitted: 'Waiting on approval',
   approved: 'Done ✅',
@@ -17,7 +17,7 @@ const STATUS_LABEL: Record<DomoTask['status'], string> = {
 export default function Tasks() {
   const { household, member, capabilities } = useHousehold();
   const { members } = useHouseholdMembers(household?.id);
-  const [tasks, setTasks] = useState<DomoTask[]>([]);
+  const [tasks, setTasks] = useState<MotherboardTask[]>([]);
   const [assignOpen, setAssignOpen] = useState(false);
 
   const loadTasks = useCallback(async () => {
@@ -27,7 +27,7 @@ export default function Tasks() {
       query = query.eq('assigned_to', member.id);
     }
     const { data } = await query;
-    setTasks((data as DomoTask[]) ?? []);
+    setTasks((data as MotherboardTask[]) ?? []);
   }, [household, member, capabilities]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Tasks() {
     loadTasks();
   };
 
-  const decideTask = async (task: DomoTask, approve: boolean) => {
+  const decideTask = async (task: MotherboardTask, approve: boolean) => {
     await supabase
       .from('tasks')
       .update({ status: approve ? 'approved' : 'rejected', reviewed_by: member?.id, reviewed_at: new Date().toISOString() })

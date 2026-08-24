@@ -1,5 +1,5 @@
 /**
- * Domo role & permission model.
+ * Motherboard role & permission model.
  *
  * This mirrors the Postgres `member_role` enum + RLS policies in
  * supabase/migrations. RLS is the source of truth for security — this module

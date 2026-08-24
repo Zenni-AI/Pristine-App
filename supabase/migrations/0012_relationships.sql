@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Relationships & connection: date nights, recurring couples
+-- Motherboard — Relationships & connection: date nights, recurring couples
 -- activities, anniversaries/birthdays, family nights, friends outreach
 -- reminders, self-care reminders. Mostly admin-pair private data (visible to
 -- both admins, not necessarily to kids) except family night events which are

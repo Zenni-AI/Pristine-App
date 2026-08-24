@@ -1,6 +1,6 @@
 'use client';
 
-import { SEAT_PRICES, formatCents } from '@domo/shared';
+import { SEAT_PRICES, formatCents } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
 export default function SettingsPage() {

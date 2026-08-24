@@ -1,11 +1,11 @@
-# Domo
+# Motherboard
 
-Domo is a full-stack AI life & home management app for the whole family.
+Motherboard is a full-stack AI life & home management app for the whole family.
 Every family member downloads the same app — iOS, Android, or web — and
 sees a different experience based on their role: **Primary Admin, Second
 Admin, Adult Member, Kid, or Babysitter.**
 
-Domo doesn't wait to be asked. It proactively manages chores, schedules,
+Motherboard doesn't wait to be asked. It proactively manages chores, schedules,
 meals, home maintenance, finances, vehicles, health, relationships,
 holidays, and family location — and gets smarter about your family's
 patterns the longer you use it.

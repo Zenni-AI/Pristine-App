@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Linking } from 'react-native';
-import { SEAT_PRICES, estimateMonthlyCents, formatCents } from '@domo/shared';
+import { SEAT_PRICES, estimateMonthlyCents, formatCents } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useHouseholdMembers } from '@/lib/useHouseholdMembers';
 import { colors } from '@/theme/colors';

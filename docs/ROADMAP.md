@@ -1,4 +1,4 @@
-# Domo — Roadmap
+# Motherboard — Roadmap
 
 This tracks what's built vs. what's next. The database schema
 (`supabase/migrations/`) already covers every domain in the product spec —
@@ -28,7 +28,7 @@ modeling.
 ## 🔜 Next up
 
 ### Depth on existing screens
-- [ ] Replace 1×1 placeholder app icons/splash with real Domo branding
+- [ ] Replace 1×1 placeholder app icons/splash with real Motherboard branding
 - [ ] Kid PIN-based login (no email required) for younger kids
 - [ ] Photo upload/sharing in chat (currently schema-ready, no picker UI)
 - [ ] Push token registration (`expo-notifications` → `notification_preferences.push_token`)

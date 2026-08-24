@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Home management: maintenance/repairs, warranties, appliances,
+-- Motherboard — Home management: maintenance/repairs, warranties, appliances,
 -- vendors, inventory, and document storage.
 -- ============================================================================
 

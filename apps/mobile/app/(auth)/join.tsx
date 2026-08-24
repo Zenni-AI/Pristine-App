@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import type { MemberRole } from '@domo/shared';
+import type { MemberRole } from '@motherboard/shared';
 import { supabase } from '@/lib/supabase';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { colors } from '@/theme/colors';
@@ -84,7 +84,7 @@ export default function Join() {
             placeholder="The Smith Family"
             placeholderTextColor={colors.dark.textSecondary}
           />
-          <Text style={styles.hint}>You'll be the Primary Admin — full control of Domo for your family.</Text>
+          <Text style={styles.hint}>You'll be the Primary Admin — full control of Motherboard for your family.</Text>
         </>
       ) : (
         <>

@@ -5,7 +5,7 @@ import { useHousehold } from '@/lib/HouseholdProvider';
 import { colors, roleAccentColors } from '@/theme/colors';
 
 /**
- * One tab bar, five roles. Every role gets Home / Chat / Tasks / Map / Domo
+ * One tab bar, five roles. Every role gets Home / Chat / Tasks / Map / Motherboard
  * (voice) — location and messaging are never paywalled or role-gated per
  * product spec. What differs is what's *inside* each tab (a kid sees only
  * their own tasks, an admin sees everyone's + an approval queue, etc.) and

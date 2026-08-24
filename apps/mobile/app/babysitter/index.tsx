@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { router } from 'expo-router';
-import { BABYSITTER_UNLOCK_LABELS } from '@domo/shared';
+import { BABYSITTER_UNLOCK_LABELS } from '@motherboard/shared';
 import { useBabysitterSession } from '@/lib/useBabysitterSession';
 import { useAuth } from '@/lib/AuthProvider';
 import { SectionCard } from '@/components/SectionCard';

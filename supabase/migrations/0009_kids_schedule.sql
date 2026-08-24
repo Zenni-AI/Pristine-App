@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Kids & family schedules: sports seasons, practices, games, school
+-- Motherboard — Kids & family schedules: sports seasons, practices, games, school
 -- events, activities, homework/project due dates, one-on-one time reminders.
 -- ============================================================================
 

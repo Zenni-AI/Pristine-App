@@ -1,5 +1,5 @@
 /**
- * Domo pricing model. Prices are in USD cents to avoid float issues.
+ * Motherboard pricing model. Prices are in USD cents to avoid float issues.
  * Mirrors the Stripe product/price catalog — see docs/ARCHITECTURE.md for
  * how these map to Stripe Price IDs (kept in env, not hardcoded, since
  * Stripe price IDs differ between test/live mode).

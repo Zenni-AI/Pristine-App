@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
 
     let customerId = sub?.stripe_customer_id as string | undefined;
     if (!customerId) {
-      const customer = await stripe.customers.create({ name: household?.name ?? 'Domo household', metadata: { household_id: householdId } });
+      const customer = await stripe.customers.create({ name: household?.name ?? 'Motherboard household', metadata: { household_id: householdId } });
       customerId = customer.id;
       await supabase.from('subscriptions').upsert({ household_id: householdId, stripe_customer_id: customerId });
     }
@@ -49,8 +49,8 @@ Deno.serve(async (req) => {
       mode: 'subscription',
       customer: customerId,
       line_items: lineItems,
-      success_url: successUrl ?? 'domo://billing-success',
-      cancel_url: cancelUrl ?? 'domo://billing-cancel',
+      success_url: successUrl ?? 'motherboard://billing-success',
+      cancel_url: cancelUrl ?? 'motherboard://billing-cancel',
       metadata: { household_id: householdId, bundle_plan: bundlePlan ?? '', seat_roles: (seatRoles ?? []).join(',') },
     });
 

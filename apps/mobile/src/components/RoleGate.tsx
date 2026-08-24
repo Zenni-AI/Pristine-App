@@ -1,5 +1,5 @@
 import React from 'react';
-import type { MemberRole } from '@domo/shared';
+import type { MemberRole } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 
 interface RoleGateProps {

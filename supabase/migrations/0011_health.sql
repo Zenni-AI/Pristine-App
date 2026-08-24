@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Health: medications, doctor/dentist appointments, prescription
+-- Motherboard — Health: medications, doctor/dentist appointments, prescription
 -- refills. Sensitive by nature: visible to admins + the member themself;
 -- kids do NOT see other kids' health data; adult_member sees all (read-only)
 -- consistent with their household-wide visibility.

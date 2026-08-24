@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Holidays & events catalog + external calendar integrations
+-- Motherboard — Holidays & events catalog + external calendar integrations
 -- (Google Calendar, Outlook, Apple Calendar) with two-way sync.
 -- ============================================================================
 
@@ -84,7 +84,7 @@ create table calendar_connections (
 );
 
 -- Local mirror of synced external events, plus mapping so pushes/pulls don't
--- duplicate. Two-way sync: Domo-created schedule_events push out via
+-- duplicate. Two-way sync: Motherboard-created schedule_events push out via
 -- external_event_id null->set; externally-created events pull in here.
 create table synced_calendar_events (
   id uuid primary key default uuid_generate_v4(),

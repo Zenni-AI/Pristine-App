@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Garden & plants: custom watering schedules, seasonal care reminders.
+-- Motherboard — Garden & plants: custom watering schedules, seasonal care reminders.
 -- ============================================================================
 
 create table plants (

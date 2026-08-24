@@ -1,5 +1,5 @@
 /**
- * Domo design tokens. The "Jarvis" dark theme is used for the voice screen
+ * Motherboard design tokens. The "Jarvis" dark theme is used for the voice screen
  * and as the app's default look; a light theme is available for web/tablet
  * contexts where a bright kitchen-counter display reads better.
  */
@@ -11,7 +11,7 @@ export const colors = {
     border: '#262E42',
     textPrimary: '#F4F6FB',
     textSecondary: '#9AA5BD',
-    accent: '#6C5CE7', // Domo violet
+    accent: '#6C5CE7', // Motherboard violet
     accentGlow: '#8B7CFF',
     success: '#3DD9A7',
     warning: '#F5B942',

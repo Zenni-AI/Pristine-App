@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { ChatMessage } from '@domo/shared';
+import type { ChatMessage } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
 export default function FamilyChatPage() {

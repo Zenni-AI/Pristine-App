@@ -1,10 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import type { DomoTask, HouseholdMember } from '@domo/shared';
+import type { MotherboardTask, HouseholdMember } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
-const STATUS_LABEL: Record<DomoTask['status'], string> = {
+const STATUS_LABEL: Record<MotherboardTask['status'], string> = {
   assigned: 'To do',
   submitted: 'Waiting on approval',
   approved: 'Done ✅',
@@ -14,7 +14,7 @@ const STATUS_LABEL: Record<DomoTask['status'], string> = {
 
 export default function TasksPage() {
   const { supabase, household, member, capabilities } = useApp();
-  const [tasks, setTasks] = useState<DomoTask[]>([]);
+  const [tasks, setTasks] = useState<MotherboardTask[]>([]);
   const [members, setMembers] = useState<HouseholdMember[]>([]);
 
   const load = useCallback(async () => {
@@ -22,7 +22,7 @@ export default function TasksPage() {
     let query = supabase.from('tasks').select('*').eq('household_id', household.id).order('due_at', { ascending: true });
     if (!capabilities?.fullVisibility) query = query.eq('assigned_to', member.id);
     const { data } = await query;
-    setTasks((data as DomoTask[]) ?? []);
+    setTasks((data as MotherboardTask[]) ?? []);
 
     if (capabilities?.fullVisibility) {
       const { data: memberRows } = await supabase.from('household_members').select('*').eq('household_id', household.id).eq('is_active', true);
@@ -41,7 +41,7 @@ export default function TasksPage() {
     load();
   };
 
-  const decideTask = async (task: DomoTask, approve: boolean) => {
+  const decideTask = async (task: MotherboardTask, approve: boolean) => {
     await supabase.from('tasks').update({ status: approve ? 'approved' : 'rejected', reviewed_by: member?.id, reviewed_at: new Date().toISOString() }).eq('id', task.id);
     load();
   };

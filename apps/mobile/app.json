@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Domo",
-    "slug": "domo",
-    "scheme": "domo",
+    "name": "Motherboard",
+    "slug": "motherboard",
+    "scheme": "motherboard",
     "version": "0.1.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -15,20 +15,20 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.domo.app",
+      "bundleIdentifier": "com.motherboard.app",
       "config": {
         "usesNonExemptEncryption": false
       },
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Domo uses your location to share it with your family, show arrive/leave alerts, and power the SOS button.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Domo shares your location with your family in the background so arrive/leave alerts and drive alerts keep working.",
-        "NSMicrophoneUsageDescription": "Domo uses your microphone for voice conversations with your AI butler.",
-        "NSCameraUsageDescription": "Domo uses your camera to share photos in family chat and to attach photos to completed chores.",
+        "NSLocationWhenInUseUsageDescription": "Motherboard uses your location to share it with your family, show arrive/leave alerts, and power the SOS button.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Motherboard shares your location with your family in the background so arrive/leave alerts and drive alerts keep working.",
+        "NSMicrophoneUsageDescription": "Motherboard uses your microphone for voice conversations with your AI butler.",
+        "NSCameraUsageDescription": "Motherboard uses your camera to share photos in family chat and to attach photos to completed chores.",
         "UIBackgroundModes": ["location", "remote-notification"]
       }
     },
     "android": {
-      "package": "com.domo.app",
+      "package": "com.motherboard.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B0E14"

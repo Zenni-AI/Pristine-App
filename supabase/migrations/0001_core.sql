@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Core schema: households, members, roles, invites, subscriptions
+-- Motherboard — Core schema: households, members, roles, invites, subscriptions
 -- All application data is scoped per household. RLS enforces that a user can
 -- only read/write rows belonging to a household they are a member of, with
 -- write access further restricted by role (see helper functions below).

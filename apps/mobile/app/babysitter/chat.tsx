@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { router } from 'expo-router';
 import * as Location from 'expo-location';
-import type { ChatMessage } from '@domo/shared';
+import type { ChatMessage } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useBabysitterSession } from '@/lib/useBabysitterSession';
 import { supabase } from '@/lib/supabase';

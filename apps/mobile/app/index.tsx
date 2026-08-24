@@ -4,7 +4,7 @@ import { Redirect } from 'expo-router';
 import { useAuth } from '@/lib/AuthProvider';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { colors } from '@/theme/colors';
-import { ONBOARDING_TOPICS } from '@domo/shared';
+import { ONBOARDING_TOPICS } from '@motherboard/shared';
 import { useOnboardingStatus } from '@/lib/useOnboardingStatus';
 
 /**

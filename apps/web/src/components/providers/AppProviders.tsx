@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import type { Session, SupabaseClient } from '@supabase/supabase-js';
-import { getCapabilities, type Household, type HouseholdMember, type MemberRole, type RoleCapabilities } from '@domo/shared';
+import { getCapabilities, type Household, type HouseholdMember, type MemberRole, type RoleCapabilities } from '@motherboard/shared';
 import { createSupabaseBrowserClient } from '@/lib/supabase/client';
 
 interface AppContextValue {

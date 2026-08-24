@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
-import type { MemberLocation, SavedLocation } from '@domo/shared';
+import type { MemberLocation, SavedLocation } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useHouseholdMembers } from '@/lib/useHouseholdMembers';
 import { supabase } from '@/lib/supabase';

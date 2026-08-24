@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Location: real-time map, saved places, safe zones, SOS, drive alerts.
+-- Motherboard — Location: real-time map, saved places, safe zones, SOS, drive alerts.
 -- Never paywalled — every account type (including kid and babysitter) can
 -- read/write their own location and read the household map, gated only by
 -- babysitter session unlocks for the 'kids_location' item.

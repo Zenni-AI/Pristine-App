@@ -37,7 +37,7 @@ Deno.serve(async (req) => {
     // A babysitter without an email gets a placeholder auth account tied to
     // a one-time PIN/magic-link the admin shares in person; with an email we
     // send a real invite so they can sign in on their own device.
-    const placeholderEmail = email || `sitter+${crypto.randomUUID().slice(0, 8)}@babysitters.domo.app`;
+    const placeholderEmail = email || `sitter+${crypto.randomUUID().slice(0, 8)}@babysitters.motherboard.app`;
 
     let authUserId: string;
     if (email) {

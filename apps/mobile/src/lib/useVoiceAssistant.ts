@@ -9,7 +9,7 @@ export type VoiceState = 'idle' | 'listening' | 'thinking' | 'speaking';
  * Drives the voice screen: records the user's speech, sends it to the
  * `voice-assistant` edge function (Anthropic for reasoning + ElevenLabs for
  * TTS — see supabase/functions/voice-assistant), and plays back the reply.
- * Conversation turns are logged to ai_conversations/ai_messages so Domo's
+ * Conversation turns are logged to ai_conversations/ai_messages so Motherboard's
  * proactive butler can learn from what's discussed here too.
  */
 export function useVoiceAssistant() {

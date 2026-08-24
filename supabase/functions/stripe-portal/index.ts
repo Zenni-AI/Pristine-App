@@ -1,5 +1,5 @@
 // Creates a Stripe Billing Portal session so admins can manage payment
-// method / plan / invoices without Domo building its own billing UI.
+// method / plan / invoices without Motherboard building its own billing UI.
 //   supabase functions deploy stripe-portal
 import Stripe from 'https://esm.sh/stripe@16.2.0?target=deno&no-check';
 import { corsHeaders } from '../_shared/cors.ts';
@@ -19,7 +19,7 @@ Deno.serve(async (req) => {
 
     const session = await stripe.billingPortal.sessions.create({
       customer: sub.stripe_customer_id,
-      return_url: returnUrl ?? 'domo://settings',
+      return_url: returnUrl ?? 'motherboard://settings',
     });
 
     return new Response(JSON.stringify({ url: session.url }), { headers: { ...corsHeaders, 'content-type': 'application/json' } });

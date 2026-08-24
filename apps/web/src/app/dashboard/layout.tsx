@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { SEAT_PRICES } from '@domo/shared';
+import { SEAT_PRICES } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
 
 const NAV = [
@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (isLoading || !household || !member || !role) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background text-textSecondary">
-        Loading Domo…
+        Loading Motherboard…
       </div>
     );
   }
@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex min-h-screen bg-background text-textPrimary">
       <aside className="flex w-64 flex-col border-r border-border bg-surface p-6">
-        <span className="mb-8 text-xl font-bold">Domo</span>
+        <span className="mb-8 text-xl font-bold">Motherboard</span>
         <nav className="flex flex-col gap-1">
           {NAV.map((item) => (
             <Link

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Domo — Tasks: chores, punishments, reading, general responsibilities,
+-- Motherboard — Tasks: chores, punishments, reading, general responsibilities,
 -- points/reward system, and per-member personal reminders.
 -- ============================================================================
 

@@ -1,4 +1,4 @@
-// Domo voice assistant — full loop: speech-to-text (ElevenLabs Scribe) ->
+// Motherboard voice assistant — full loop: speech-to-text (ElevenLabs Scribe) ->
 // reasoning with household context (Anthropic) -> text-to-speech (ElevenLabs)
 // -> reply audio uploaded to Supabase Storage. Deploy with:
 //   supabase functions deploy voice-assistant
@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     }
     if (!transcript) throw new Error('No audio or text provided');
 
-    // 2. Pull light household context so Domo can answer "what's on my plate today" etc.
+    // 2. Pull light household context so Motherboard can answer "what's on my plate today" etc.
     const [{ data: tasks }, { data: nudges }] = await Promise.all([
       supabase.from('tasks').select('title, due_at, status').eq('household_id', householdId).eq('assigned_to', memberId).in('status', ['assigned', 'submitted']).limit(5),
       supabase.from('proactive_nudges').select('message').eq('household_id', householdId).eq('status', 'pending').limit(5),
@@ -38,7 +38,7 @@ Deno.serve(async (req) => {
 
     const context = [
       tasks?.length ? `Upcoming tasks: ${tasks.map((t) => t.title).join(', ')}` : '',
-      nudges?.length ? `Things Domo has noticed: ${nudges.map((n) => n.message).join(' | ')}` : '',
+      nudges?.length ? `Things Motherboard has noticed: ${nudges.map((n) => n.message).join(' | ')}` : '',
     ]
       .filter(Boolean)
       .join('\n');

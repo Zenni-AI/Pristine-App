@@ -13,7 +13,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 /**
- * Domo uses passwordless email OTP for the primary/second admin and adult
+ * Motherboard uses passwordless email OTP for the primary/second admin and adult
  * signup flow. Kid and babysitter accounts are provisioned by an admin (see
  * fn_join_household) and typically sign in via a short invite-code + PIN
  * flow instead — that's handled in app/(auth)/join.tsx, which still lands

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
-import { SEAT_PRICES, formatCents } from '@domo/shared';
+import { SEAT_PRICES, formatCents } from '@motherboard/shared';
 import { useHousehold } from '@/lib/HouseholdProvider';
 import { useAuth } from '@/lib/AuthProvider';
 import { SectionCard } from '@/components/SectionCard';
