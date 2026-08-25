@@ -37,12 +37,22 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
     setSession(data.session);
 
     if (data.session?.user) {
-      const { data: memberRow } = await supabase
+      // .limit(1) before .maybeSingle() matters: without it, a user with
+      // more than one active household_members row (e.g. from retrying
+      // "Create household" after what looked like a failure) makes
+      // .maybeSingle() error out on "multiple rows returned" — which,
+      // destructured as just `{ data }` here, silently discards the error
+      // and leaves memberRow null, bouncing the user back to /join forever
+      // even though they do have a household. Picking the oldest one keeps
+      // behavior stable across repeated calls.
+      const { data: memberRows } = await supabase
         .from('household_members')
         .select('*')
         .eq('user_id', data.session.user.id)
         .eq('is_active', true)
-        .maybeSingle();
+        .order('joined_at', { ascending: true })
+        .limit(1);
+      const memberRow = memberRows?.[0] ?? null;
       setMember((memberRow as HouseholdMember) ?? null);
 
       if (memberRow) {

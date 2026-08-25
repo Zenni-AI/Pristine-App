@@ -42,12 +42,19 @@ export function HouseholdProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     setIsLoading(true);
-    const { data: memberRow } = await supabase
+    // .limit(1) before .maybeSingle() matters: without it, a user with more
+    // than one active household_members row makes .maybeSingle() error on
+    // "multiple rows returned" — which, destructured as just `{ data }`
+    // here, silently discards the error and leaves memberRow null. See
+    // supabase/migrations/0016_household_idempotency.sql for the root cause.
+    const { data: memberRows } = await supabase
       .from('household_members')
       .select('*')
       .eq('user_id', session.user.id)
       .eq('is_active', true)
-      .maybeSingle();
+      .order('joined_at', { ascending: true })
+      .limit(1);
+    const memberRow = memberRows?.[0] ?? null;
 
     if (memberRow) {
       setMember(memberRow as HouseholdMember);
