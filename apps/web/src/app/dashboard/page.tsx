@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { MotherboardTask, MealPlanEntry, ProactiveNudge } from '@motherboard/shared';
 import { useApp } from '@/components/providers/AppProviders';
-import { Card, PageHeader, EmptyState, Badge } from '@/components/ui';
+import { Card, PageHeader, EmptyState, Badge, QuoteOfDay } from '@/components/ui';
 
 export default function DashboardHome() {
   const { supabase, household, member, capabilities } = useApp();
@@ -56,6 +56,7 @@ export default function DashboardHome() {
 
   return (
     <div className="flex flex-col gap-5">
+      <QuoteOfDay />
       <PageHeader title={`Good morning, ${member.display_name.split(' ')[0]}.`} subtitle="Here's your household today." />
 
       {nudges.length > 0 && (

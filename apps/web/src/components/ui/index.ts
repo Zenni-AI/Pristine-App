@@ -5,3 +5,4 @@ export { Avatar } from './Avatar';
 export { Badge, CategoryDot } from './Badge';
 export { PageHeader } from './PageHeader';
 export { EmptyState, LoadingState } from './EmptyState';
+export { QuoteOfDay } from './QuoteOfDay';

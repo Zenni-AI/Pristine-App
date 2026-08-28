@@ -6,6 +6,7 @@ import { useHousehold } from '@/lib/HouseholdProvider';
 import { supabase } from '@/lib/supabase';
 import { SectionCard } from '@/components/SectionCard';
 import { SosButton } from '@/components/SosButton';
+import { QuoteOfDay } from '@/components/QuoteOfDay';
 import { colors } from '@/theme/colors';
 
 export default function Dashboard() {
@@ -61,6 +62,7 @@ export default function Dashboard() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ padding: 20, paddingTop: 60, paddingBottom: 40 }}>
+      <QuoteOfDay />
       <Text style={styles.greeting}>Hey {member.display_name.split(' ')[0]} 👋</Text>
       <Text style={styles.subGreeting}>{household.name}</Text>
 
