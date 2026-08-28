@@ -141,3 +141,24 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Domo — Expo / React Native
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+apps/mobile/ios/
+apps/mobile/android/
+
+# Turborepo
+.turbo/
+
+# Supabase
+supabase/.branches/
+supabase/.temp/
+
