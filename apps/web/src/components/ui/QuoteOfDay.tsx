@@ -16,7 +16,8 @@ export function QuoteOfDay() {
       <span aria-hidden className="text-3xl font-serif italic leading-none text-accent">
         “
       </span>
-      <p className="mt-1 text-section-title font-semibold leading-snug text-textPrimary">{quote}</p>
+      <p className="mt-1 text-section-title font-semibold leading-snug text-textPrimary">{quote.text}</p>
+      <p className="mt-2 text-secondary text-textSecondary">— {quote.author}</p>
     </div>
   );
 }

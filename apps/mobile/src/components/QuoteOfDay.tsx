@@ -15,7 +15,8 @@ export function QuoteOfDay() {
   return (
     <View style={styles.wrap}>
       <Text style={styles.mark}>“</Text>
-      <Text style={styles.quote}>{quote}</Text>
+      <Text style={styles.quote}>{quote.text}</Text>
+      <Text style={styles.author}>— {quote.author}</Text>
     </View>
   );
 }
@@ -31,4 +32,5 @@ const styles = StyleSheet.create({
   },
   mark: { color: colors.dark.accentGlow, fontSize: 28, lineHeight: 28, fontStyle: 'italic', marginBottom: 4 },
   quote: { color: colors.dark.textPrimary, fontSize: 17, lineHeight: 23, fontWeight: '600' },
+  author: { color: colors.dark.textSecondary, fontSize: 13, lineHeight: 18, marginTop: 6 },
 });
